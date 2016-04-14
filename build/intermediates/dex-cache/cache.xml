@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="G:\workspace\AndroidStudioProjects\DemoAppDress\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="G:\workspace\AndroidStudioProjects\DemoAppDress\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1-de6f5ae2f2eac7ea910b1222f745f281c0727fe8.jar" />
+    </item>
+    <item
+        jar="G:\workspace\AndroidStudioProjects\DemoAppDress\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="G:\workspace\AndroidStudioProjects\DemoAppDress\app\build\intermediates\pre-dexed\debug\classes-ead6088f501ecf368f76af273e9882a7479f0f1f.jar" />
+    </item>
+    <item
+        jar="G:\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="G:\workspace\AndroidStudioProjects\DemoAppDress\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.1-f55ea6a8d124c839380cd98b518ad625da55b49a.jar" />
+    </item>
+    <item
+        jar="G:\workspace\AndroidStudioProjects\DemoAppDress\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="G:\workspace\AndroidStudioProjects\DemoAppDress\app\build\intermediates\pre-dexed\debug\classes-c5d10037a1a291a67aab34996bc1318ea8496fa8.jar" />
+    </item>
+
+</items>
