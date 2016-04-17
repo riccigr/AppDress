@@ -23,11 +23,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Log.i("bd", "before create");
 
-        db.execSQL("CREATE TABLE dadosClimaticos (" +
-                "id INTEGER PRIMARY KEY," +
-                "cidade VARCHAR(50) NULL, " +
-                "mes INTEGER NULL, " +
-                "temperatura DECIMAL(2,2) NULL)");
+
 
         Log.i("bd", "before insert");
 
