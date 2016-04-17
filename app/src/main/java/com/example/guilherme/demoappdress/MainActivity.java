@@ -19,6 +19,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
+    //region #VARIAVEIS#
     public Spinner daySpinner;
     public Spinner monthSpinner;
     public SeekBar seekBar;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private String array_spinner[];
     private ImageButton btnCalendar;
     static final int DATE_DIALOG_ID = 0;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,42 +39,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnCalendar = (ImageButton) findViewById(R.id.btnCalendar);
-       // btnCalendar.setOnClickListener(this);
-
-       // daySpinner  = (Spinner) findViewById(R.id.daySpinner);
-//        ArrayAdapter<CharSequence> dayadapter = ArrayAdapter.createFromResource(this, R.array.item_day, android.R.layout.simple_spinner_item);
-//        dayadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-//        daySpinner.setAdapter(dayadapter);
-
-        //monthSpinner  = (Spinner) findViewById(R.id.monthSpinner);
-//        ArrayAdapter<CharSequence> monthadapter = ArrayAdapter.createFromResource(this, R.array.item_month, android.R.layout.simple_spinner_item);
-//        monthadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-//        monthSpinner.setAdapter(monthadapter);
-
         txtData = (TextView) findViewById(R.id.txtData);
         seekBar = (SeekBar) findViewById(R.id.periodoSeekBar);
         seekBarValue = (TextView) findViewById(R.id.seekBarValue);
+        spinnerDestino = (Spinner) findViewById(R.id.spinnerDestino);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,
-                                          boolean fromUser) {
-                // TODO Auto-generated method stub
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 seekBarValue.setText(String.valueOf(progress+1));
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
             }
         });
 
+        //region #COMBO TOP CIDADES#
         array_spinner=new String[11];
         array_spinner[0]="Selecione...";
         array_spinner[1]="Porto Seguro";
@@ -85,14 +73,16 @@ public class MainActivity extends AppCompatActivity {
         array_spinner[8]="Las Vegas";
         array_spinner[9]="Buenos Aires";
         array_spinner[10]="Paris";
-        spinnerDestino = (Spinner) findViewById(R.id.spinnerDestino);
-        ArrayAdapter adapter = new ArrayAdapter(this,
-                android.R.layout.simple_spinner_item, array_spinner);
+        //endregion
+
+
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item, array_spinner);
         spinnerDestino.setAdapter(adapter);
 
     }
 
 
+    //region #METODOS PARA O CALENDAR#
     @Override
     protected Dialog onCreateDialog(int id) {
         Calendar calendario = Calendar.getInstance();
@@ -106,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+    //Entregando a data no formato br
     private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             String data = String.valueOf(dayOfMonth) + " / "  + String.valueOf(monthOfYear + 1) +  " / " + String.valueOf(year);
@@ -113,7 +104,12 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public void showCalendar(View v) {
+        showDialog(DATE_DIALOG_ID);
+    }
+    //endregion
 
+    //botao principal
     public void searchClothes(View view) {
 
         genereRadio = (RadioButton) findViewById(R.id.mascRadioButton);
@@ -126,19 +122,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(this, IndicacaoActivity.class);
-//        Intent intent = new Intent(this, teste.class);
-        intent.putExtra("genero" ,genero);
-        intent.putExtra("periodo" , seekBarValue.getText().toString());
-//        intent.putExtra("dia", daySpinner.getSelectedItem().toString());
-//        intent.putExtra("mes", monthSpinner.getSelectedItem().toString());
-        intent.putExtra("destino", spinnerDestino.getSelectedItem().toString() );
+        intent.putExtra("GENERO" ,genero);
+        intent.putExtra("PERIODO" , seekBarValue.getText().toString());
+        intent.putExtra("DESTINO", spinnerDestino.getSelectedItem().toString() );
+        intent.putExtra("ID_DESTINO", spinnerDestino.getSelectedItemId() );
+        intent.putExtra("DATA", txtData.toString() );
+        intent.putExtra("MES", txtData.toString() );
+        intent.putExtra("DIA", txtData.toString() );
+        intent.putExtra("ANO", txtData.toString() );
+
         startActivity(intent);
     }
 
 
-    public void showCalendar(View v) {
-        showDialog(DATE_DIALOG_ID);
-    }
+
 }
 
 

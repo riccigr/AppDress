@@ -40,11 +40,9 @@ public class IndicacaoActivity extends Activity {
 
         Intent i = getIntent();
 
-        Log.i("Sexo: ",i.getStringExtra("genero"));
-//        Log.i("Dia: ",i.getStringExtra("dia"));
-//        Log.i("Mês: ",i.getStringExtra("mes"));
-        Log.i("Destino: ",i.getStringExtra("destino"));
-        Log.i("Periodo: ",i.getStringExtra("periodo"));
+        Log.i("Sexo: ",i.getStringExtra("GENERO"));
+        Log.i("Destino: ",i.getStringExtra("DESTINO"));
+        Log.i("Periodo: ",i.getStringExtra("PERIODO"));
 
  //----------------------------------
 
