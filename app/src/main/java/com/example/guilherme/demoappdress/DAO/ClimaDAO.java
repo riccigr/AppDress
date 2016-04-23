@@ -28,6 +28,9 @@ public class ClimaDAO extends DbContentProvider implements IClimaSchema, IClimaD
         final String selectionArgs[] = { String.valueOf(mes), String.valueOf(cidade)};
         double temperatura = 0;
 
+
+        Log.i("", " " );
+
         try{
 
             Cursor c = mDb.query(false, CLIMA_TABLE, columnsArgs , selection, selectionArgs, null, null, null, null );
@@ -40,14 +43,11 @@ public class ClimaDAO extends DbContentProvider implements IClimaSchema, IClimaD
 
                 for(int i= 1; i <= c.getCount(); i++){
 
-                    Log.i("TEMPERATURA", c.getString(tempMediaIndex));
                     temperatura = c.getDouble(tempMediaIndex);
-
+                    Log.i("TEMPERATURA", String.valueOf(temperatura) );
                 }
             }
-
             c.close();
-
 
         }catch (Exception e){
             Log.e("ERRO>>>", "buscaTemperaturaMedia: " + e.getMessage());

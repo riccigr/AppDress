@@ -2,9 +2,9 @@ package com.example.guilherme.demoappdress.BusinessLogic;
 
 
 import android.content.Context;
+import android.util.Log;
 
-import com.example.guilherme.demoappdress.Activities.IndicacaoActivity;
-import com.example.guilherme.demoappdress.Class.Temperatura;
+import com.example.guilherme.demoappdress.Constants.Temperatura;
 import com.example.guilherme.demoappdress.Helper.Database;
 
 import java.sql.SQLException;
@@ -14,6 +14,9 @@ public class ClimaLogic {
     public int retornoNivelTemperatura(Context applicationContext, int mes, String cidade){
 
         int nivel = 0;
+
+        Log.i("mes", String.valueOf(mes));
+        Log.i("cidade", String.valueOf(cidade));
 
         Database db = new Database(applicationContext);
         try {

@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.guilherme.demoappdress.R;
 
@@ -26,14 +27,14 @@ public class MainActivity extends AppCompatActivity {
     public Spinner monthSpinner;
     public SeekBar seekBar;
     public TextView seekBarValue;
-    public TextView txtData;
+    public TextView txtDate;
     public Button searchButton;
-    public RadioButton genereRadio;
-    public Spinner spinnerDestino;
-    private String array_spinner[];
+    public RadioButton genreRadioMasc;
+    public Spinner spinnerDestiny;
+    private String arraySpinner[];
     private ImageButton btnCalendar;
     static final int DATE_DIALOG_ID = 0;
-    public String txtMes;
+    public String txtMonth;
     //endregion
 
     @Override
@@ -42,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnCalendar = (ImageButton) findViewById(R.id.btnCalendar);
-        txtData = (TextView) findViewById(R.id.txtData);
+        txtDate = (TextView) findViewById(R.id.txtData);
         seekBar = (SeekBar) findViewById(R.id.periodoSeekBar);
         seekBarValue = (TextView) findViewById(R.id.seekBarValue);
-        spinnerDestino = (Spinner) findViewById(R.id.spinnerDestino);
+        spinnerDestiny = (Spinner) findViewById(R.id.spinnerDestino);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -64,23 +65,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //region #COMBO TOP CIDADES#
-        array_spinner=new String[11];
-        array_spinner[0]="Selecione...";
-        array_spinner[1]="Porto Seguro";
-        array_spinner[2]="Maceio";
-        array_spinner[3]="Fortaleza";
-        array_spinner[4]="Natal";
-        array_spinner[5]="Gramado";
-        array_spinner[6]="Orlando";
-        array_spinner[7]="Nova York";
-        array_spinner[8]="Las Vegas";
-        array_spinner[9]="Buenos Aires";
-        array_spinner[10]="Paris";
+        arraySpinner =new String[11];
+        arraySpinner[0]="Selecione...";
+        arraySpinner[1]="Porto Seguro";
+        arraySpinner[2]="Maceio";
+        arraySpinner[3]="Fortaleza";
+        arraySpinner[4]="Natal";
+        arraySpinner[5]="Gramado";
+        arraySpinner[6]="Orlando";
+        arraySpinner[7]="Nova York";
+        arraySpinner[8]="Las Vegas";
+        arraySpinner[9]="Buenos Aires";
+        arraySpinner[10]="Paris";
         //endregion
 
-
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item, array_spinner);
-        spinnerDestino.setAdapter(adapter);
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item, arraySpinner);
+        spinnerDestiny.setAdapter(adapter);
 
     }
 
@@ -103,8 +103,8 @@ public class MainActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             String data = String.valueOf(dayOfMonth) + " / "  + String.valueOf(monthOfYear + 1) +  " / " + String.valueOf(year);
-            txtData.setText(data);
-            txtMes = String.valueOf(monthOfYear +1);
+            txtDate.setText(data);
+            txtMonth = String.valueOf(monthOfYear +1);
         }
     };
 
@@ -114,27 +114,55 @@ public class MainActivity extends AppCompatActivity {
     //endregion
 
     //botao principal
-    public void searchClothes(View view) {
+    public void searchButton(View view) {
 
-        genereRadio = (RadioButton) findViewById(R.id.mascRadioButton);
-        String genero = "";
+        genreRadioMasc = (RadioButton) findViewById(R.id.mascRadioButton);
+        char genre = '0';
 
-        if(genereRadio.isChecked()){
-            genero = "M";
+        if(genreRadioMasc.isChecked()){
+            genre = 'M';
         }else{
-            genero = "F";
+            genre = 'F';
         }
 
-        Intent intent = new Intent(this, IndicacaoActivity.class);
-        intent.putExtra("GENERO" ,genero);
-        intent.putExtra("PERIODO" , seekBarValue.getText().toString());
-        intent.putExtra("DESTINO", spinnerDestino.getSelectedItem().toString() );
-        intent.putExtra("ID_DESTINO", spinnerDestino.getSelectedItemId() );
-        intent.putExtra("DATA_TEXTO", txtData.toString() );
-        intent.putExtra("MES", txtMes.toString() );
+//        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA GATO
+//        txtDate.setText("23/4/2016");
+//        txtMonth = "4";
+//        spinnerDestiny.setSelection(3);
 
-        startActivity(intent);
+
+        if(isValidActivity()){
+
+            Intent intent = new Intent(this, IndicacaoActivity.class);
+            intent.putExtra("GENERO", genre);
+            intent.putExtra("PERIODO", seekBarValue.getText().toString());
+            intent.putExtra("DESTINO", spinnerDestiny.getSelectedItem().toString());
+            intent.putExtra("ID_DESTINO", spinnerDestiny.getSelectedItemId());
+            intent.putExtra("DATA_TEXTO", txtDate.toString());
+            intent.putExtra("MES", txtMonth.toString());
+
+            startActivity(intent);
+        }
     }
+
+    private boolean isValidActivity(){
+
+        boolean valid = true;
+
+        if(txtDate.getText() == null || txtDate.getText().equals("")){
+            Toast.makeText(MainActivity.this, "Quando vai viajar?", Toast.LENGTH_SHORT).show();
+           return false;
+        }
+
+        if(spinnerDestiny.getSelectedItem() == null || spinnerDestiny.getSelectedItem().toString().equals("Selecione...") || spinnerDestiny.getSelectedItem().toString().equals("") ){
+            Toast.makeText(MainActivity.this, "Qual o seu destino?", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return valid;
+    }
+
+
 
 
 

@@ -1,5 +1,6 @@
 package com.example.guilherme.demoappdress.Activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,15 +11,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guilherme.demoappdress.BusinessLogic.ClimaLogic;
 import com.example.guilherme.demoappdress.BusinessLogic.RoupaLogic;
+import com.example.guilherme.demoappdress.Constants.Peca;
 import com.example.guilherme.demoappdress.R;
 
 import java.util.ArrayList;
@@ -27,6 +32,7 @@ import java.util.HashMap;
 
 public class IndicacaoActivity extends Activity {
 
+    //region #VARIAVEIS#
     // variaveis de layout
     HorizontalScrollView horizontalScrollView;
     LinearLayout grd1_1, grd1_2, grd1_3,grd1_4, grd1_5, grd1_6 ;
@@ -53,19 +59,14 @@ public class IndicacaoActivity extends Activity {
     int nivelTemperatura;
     HashMap<Integer, Integer> listaPecas = new HashMap<>();
 
+    //endregion
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.indicacao);
+        setContentView(R.layout.activity_indicacao);
 
         Intent i = getIntent();
-
-        Log.i("Sexo: ",i.getStringExtra("GENERO"));
-        Log.i("Destino: ",i.getStringExtra("DESTINO"));
-        Log.i("Periodo: ",i.getStringExtra("PERIODO"));
-        Log.i("Mes: ",i.getStringExtra("MES"));
-
- //----------------------------------
 
         mes = Integer.parseInt(i.getStringExtra("MES"));
         cidade = i.getStringExtra("DESTINO");
@@ -80,17 +81,13 @@ public class IndicacaoActivity extends Activity {
 
         listaPecas = roupaLogic.Quantificador(periodo,genero, nivelTemperatura);
 
-        for(HashMap.Entry<Integer, Integer> h : listaPecas.entrySet()){
-            Log.i("Nome Peca: ", h.getKey().toString());
-            Log.i("Quantidade: ", h.getValue().toString());
-        }
+       // Toast.makeText(IndicacaoActivity.this, "Temperatura = " + String.valueOf(nivelTemperatura), Toast.LENGTH_LONG).show();
 
-        Toast.makeText(IndicacaoActivity.this, "Temperatura = " + String.valueOf(nivelTemperatura), Toast.LENGTH_LONG).show();
-
-        MontarLayout();
+        LoadFlatIcon(listaPecas);
+       // LoadLayout();
     }
 
-    private void MontarLayout(){
+    private void LoadLayout(){
         prev = (RelativeLayout) findViewById(R.id.prev);
         next = (RelativeLayout) findViewById(R.id.next);
         horizontalScrollView = (HorizontalScrollView) findViewById(R.id.hsv);
@@ -183,6 +180,47 @@ public class IndicacaoActivity extends Activity {
                 return false;
             }
         });
+    }
+
+    //Carrega os icones dos tipos de roupas
+    private void LoadFlatIcon(HashMap<Integer, Integer> listaPecas){
+
+
+        int mapSize = listaPecas.size();
+
+        LinearLayout layoutParent = (LinearLayout)findViewById(R.id.innerLayFlat);
+        for(HashMap.Entry<Integer, Integer> h : listaPecas.entrySet())
+        {
+            LinearLayout linear = new LinearLayout(this);
+            RelativeLayout relative = new RelativeLayout(this);
+            TextView counter = new TextView(this);
+            ImageView flaticon = new ImageView(this);
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(160, LinearLayout.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+            LinearLayout.LayoutParams insideParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80, Gravity.CENTER);
+            RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+
+            linear.setOrientation(LinearLayout.HORIZONTAL);
+
+            linear.setLayoutParams(layoutParams);
+            relative.setLayoutParams(relativeParams);
+
+            counter.setLayoutParams(insideParams);
+            counter.setText(h.getValue().toString().concat("."));
+            counter.setTextAppearance(this, android.R.style.TextAppearance_DeviceDefault_Medium);
+
+            Peca peca = new Peca();
+            HashMap<Integer,String> pecaMap = peca.getPecaImageMap();
+
+            flaticon.setLayoutParams(insideParams);
+            flaticon.setImageResource(getResources().getIdentifier(pecaMap.get(h.getKey()), "drawable", getPackageName()));
+
+            // Adds the view to the layout
+            relative.addView(counter);
+            relative.addView(flaticon);
+            linear.addView(relative);
+            layoutParent.addView(linear);
+        }
     }
 
     public void camisaToSite(View view){
