@@ -1,6 +1,5 @@
 package com.example.guilherme.demoappdress.Activities;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +7,6 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -19,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.guilherme.demoappdress.BusinessLogic.ClimaLogic;
 import com.example.guilherme.demoappdress.BusinessLogic.RoupaLogic;
@@ -39,6 +36,7 @@ public class IndicacaoActivity extends Activity {
     LinearLayout grd2_1, grd2_2, grd2_3,grd2_4, grd2_5, grd2_6 ;
     LinearLayout.LayoutParams params, params2;
     ArrayList<LinearLayout> layouts, layouts2;
+    TextView txtDescription ;
     RelativeLayout next, prev;
     int viewWidth;
     int mWidth;
@@ -52,12 +50,11 @@ public class IndicacaoActivity extends Activity {
     private Context context;
 
     // variaveis de transicao
-    int mes;
-    String cidade;
-    char genero;
     int periodo = 0;
-    int nivelTemperatura;
-    HashMap<Integer, Integer> listaPecas = new HashMap<>();
+    int nivelTemperatura, mes;
+    String cidade, descricao ;
+    char genero;
+    HashMap<Integer, Integer> listaPecas;
 
     //endregion
 
@@ -65,6 +62,10 @@ public class IndicacaoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indicacao);
+
+        layoutCleaner();
+
+        txtDescription = (TextView) findViewById(R.id.txtDescription);
 
         Intent i = getIntent();
 
@@ -75,7 +76,8 @@ public class IndicacaoActivity extends Activity {
 
         ClimaLogic climaLogic = new ClimaLogic();
 
-        nivelTemperatura = climaLogic.retornoNivelTemperatura(getApplicationContext(), mes, cidade);
+        nivelTemperatura = climaLogic.getTemperatureLevel(getApplicationContext(), mes, cidade);
+        txtDescription.setText(climaLogic.getWeatherDescription(nivelTemperatura));
 
         RoupaLogic roupaLogic = new RoupaLogic();
 
@@ -83,11 +85,11 @@ public class IndicacaoActivity extends Activity {
 
        // Toast.makeText(IndicacaoActivity.this, "Temperatura = " + String.valueOf(nivelTemperatura), Toast.LENGTH_LONG).show();
 
-        LoadFlatIcon(listaPecas);
-       // LoadLayout();
+        loadLayout(listaPecas);
+       // loadLayout();
     }
 
-    private void LoadLayout(){
+    private void loadLayout(){
         prev = (RelativeLayout) findViewById(R.id.prev);
         next = (RelativeLayout) findViewById(R.id.next);
         horizontalScrollView = (HorizontalScrollView) findViewById(R.id.hsv);
@@ -183,8 +185,7 @@ public class IndicacaoActivity extends Activity {
     }
 
     //Carrega os icones dos tipos de roupas
-    private void LoadFlatIcon(HashMap<Integer, Integer> listaPecas){
-
+    private void loadLayout(HashMap<Integer, Integer> listaPecas){
 
         int mapSize = listaPecas.size();
 
@@ -221,6 +222,13 @@ public class IndicacaoActivity extends Activity {
             linear.addView(relative);
             layoutParent.addView(linear);
         }
+    }
+
+    //remover as views criadas dinamicamente;
+    private void layoutCleaner(){
+        LinearLayout layoutParent = (LinearLayout)findViewById(R.id.innerLayFlat);
+        layoutParent.removeAllViews();
+        listaPecas = new HashMap<>();
     }
 
     public void camisaToSite(View view){

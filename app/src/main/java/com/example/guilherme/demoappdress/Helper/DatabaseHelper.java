@@ -5,8 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.guilherme.demoappdress.DAO.CreateDbDAO;
-import com.example.guilherme.demoappdress.Interfaces.IClimaSchema;
+import com.example.guilherme.demoappdress.Interfaces.Schema.IClimaSchema;
 
 /**
  * Created by Guilherme on 16/04/2016.

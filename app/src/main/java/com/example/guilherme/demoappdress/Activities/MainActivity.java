@@ -94,7 +94,9 @@ public class MainActivity extends AppCompatActivity {
         int dia = calendario.get(Calendar.DAY_OF_MONTH);
         switch (id) {
             case DATE_DIALOG_ID:
-                return new DatePickerDialog(this, mDateSetListener, ano, mes, dia);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(this, mDateSetListener, ano, mes, dia);
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                return datePickerDialog;
         }
         return null;
     }
