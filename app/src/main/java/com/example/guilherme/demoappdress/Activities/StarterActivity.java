@@ -20,6 +20,15 @@ public class StarterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starter);
 
+        Database db = new Database(getApplicationContext());
+        try {
+            db.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+
         ImageView applogo = (ImageView) findViewById(R.id.appLogo);
         applogo.animate().alpha(0f).setDuration(TIMEOUT);
 

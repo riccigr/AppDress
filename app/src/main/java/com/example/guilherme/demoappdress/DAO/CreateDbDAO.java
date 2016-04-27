@@ -13,19 +13,6 @@ public class CreateDbDAO {
     }
 
     public void Create(SQLiteDatabase db){
-        db.execSQL("CREATE TABLE clima (" +
-                "id INTEGER PRIMARY KEY," +
-                "cidade VARCHAR(50) NULL, " +
-                "mes INTEGER NULL, " +
-                "tempMedia DECIMAL(2,2) NULL," +
-                "tempMin DECIMAL(2,2) NULL," +
-                "tempMax DECIMAL(2,2) NULL" +
-                ")");
-        
-        db.execSQL("CREATE TABLE loja (" +
-                "id INTEGER PRIMARY KEY," +
-                "nome VARCHAR(50) NULL" +
-                ")");
 
         db.execSQL("CREATE TABLE peca (" +
                 "id INTEGER PRIMARY KEY," +
@@ -46,12 +33,6 @@ public class CreateDbDAO {
                 "CEP VARCHAR(9) NULL," +
                 "latitude DECIMAL(10,6) NULL," +
                 "longitude DECIMAL(10,6) NULL"+
-                ")");
-
-        db.execSQL("CREATE TABLE roupaClima (" +
-                "id INTEGER PRIMARY KEY," +
-                "id_peca INTEGER NULL, " +
-                "id_clima INTEGER NULL " +
                 ")");
 
         // 0 - Muito frio (<=5)
