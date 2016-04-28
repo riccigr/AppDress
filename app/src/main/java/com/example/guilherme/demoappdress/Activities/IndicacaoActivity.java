@@ -20,11 +20,13 @@ import android.widget.TextView;
 
 import com.example.guilherme.demoappdress.BusinessLogic.ClimaLogic;
 import com.example.guilherme.demoappdress.BusinessLogic.RoupaLogic;
-import com.example.guilherme.demoappdress.Constants.Peca;
+import com.example.guilherme.demoappdress.Constants.TipoPeca;
+import com.example.guilherme.demoappdress.POJO.Peca;
 import com.example.guilherme.demoappdress.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class IndicacaoActivity extends Activity {
@@ -54,7 +56,8 @@ public class IndicacaoActivity extends Activity {
     int nivelTemperatura, mes;
     String cidade, descricao ;
     char genero;
-    HashMap<Integer, Integer> listaPecas;
+    HashMap<Integer, Integer> mapPecaQuantity;
+    List<TipoPeca> listTipoPecas = new ArrayList<>();
 
     //endregion
 
@@ -75,17 +78,19 @@ public class IndicacaoActivity extends Activity {
         periodo =  Integer.parseInt(i.getStringExtra("PERIODO"));
 
         ClimaLogic climaLogic = new ClimaLogic();
-
         nivelTemperatura = climaLogic.getTemperatureLevel(getApplicationContext(), mes, cidade);
         txtDescription.setText(climaLogic.getWeatherDescription(nivelTemperatura));
 
         RoupaLogic roupaLogic = new RoupaLogic();
+        mapPecaQuantity = roupaLogic.quantifier(periodo, genero, nivelTemperatura);
+        List<Peca> listPeca = roupaLogic.getRoupaIndication(getApplicationContext(),nivelTemperatura, genero);
 
-        listaPecas = roupaLogic.Quantificador(periodo,genero, nivelTemperatura);
+
+
 
        // Toast.makeText(IndicacaoActivity.this, "Temperatura = " + String.valueOf(nivelTemperatura), Toast.LENGTH_LONG).show();
 
-        loadLayout(listaPecas);
+        loadLayout(mapPecaQuantity);
        // loadLayout();
     }
 
@@ -210,8 +215,8 @@ public class IndicacaoActivity extends Activity {
             counter.setText(h.getValue().toString().concat("."));
             counter.setTextAppearance(this, android.R.style.TextAppearance_DeviceDefault_Medium);
 
-            Peca peca = new Peca();
-            HashMap<Integer,String> pecaMap = peca.getPecaImageMap();
+            TipoPeca tipoPeca = new TipoPeca();
+            HashMap<Integer,String> pecaMap = tipoPeca.getPecaImageMap();
 
             flaticon.setLayoutParams(insideParams);
             flaticon.setImageResource(getResources().getIdentifier(pecaMap.get(h.getKey()), "drawable", getPackageName()));
@@ -228,7 +233,7 @@ public class IndicacaoActivity extends Activity {
     private void layoutCleaner(){
         LinearLayout layoutParent = (LinearLayout)findViewById(R.id.innerLayFlat);
         layoutParent.removeAllViews();
-        listaPecas = new HashMap<>();
+        mapPecaQuantity = new HashMap<>();
     }
 
     public void camisaToSite(View view){

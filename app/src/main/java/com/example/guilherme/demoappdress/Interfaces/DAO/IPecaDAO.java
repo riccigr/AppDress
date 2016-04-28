@@ -1,9 +1,11 @@
 package com.example.guilherme.demoappdress.Interfaces.DAO;
 
-/**
- * Created by Guilherme on 24/04/2016.
- */
+import com.example.guilherme.demoappdress.POJO.Peca;
+
+import java.util.List;
+
 public interface IPecaDAO {
 
+    public List<Peca> getListPecas(List<Integer> tipoPeca, char genero);
 
 }

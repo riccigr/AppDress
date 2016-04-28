@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.guilherme.demoappdress.Interfaces.Schema.IClassificacaoPecaSchema;
 import com.example.guilherme.demoappdress.Interfaces.Schema.IClimaSchema;
 import com.example.guilherme.demoappdress.Interfaces.Schema.ILojaSchema;
 import com.example.guilherme.demoappdress.Interfaces.Schema.IPecaSchema;
@@ -35,6 +36,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL(ILojaSchema.LOJA_TABLE_INSERT);
             db.execSQL(IPecaSchema.PECA_TABLE_CREATE);
             db.execSQL(IPecaSchema.PECA_TABLE_INSERT);
+            db.execSQL(IClassificacaoPecaSchema.CLASSIFICACAO_TABLE_CREATE);
+            db.execSQL(IClassificacaoPecaSchema.CLASSIFICACAO_TABLE_INSERT);
         }catch (Exception e){
             Log.e("ERRO", "onCreate: "+  e.getMessage() );
             throw new SQLiteDatabaseCorruptException();
