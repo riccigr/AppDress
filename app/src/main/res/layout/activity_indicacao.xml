@@ -17,7 +17,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:text="É esperado temperaturas extremamente baixas, com média de 7ºC. Vista-se com diversas camadas e procure roupas impermeáveis porque a chances de nevar"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#904098" />
 
     <HorizontalScrollView
         android:id="@+id/hsvFlat"
@@ -55,14 +56,15 @@
                         android:gravity="center"
                         android:paddingRight="5dp"
                         android:singleLine="true"
-                        android:text="1-"
+                        android:text="10-"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <ImageView
                         android:id="@+id/flat1"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:src="@drawable/flat_camisa" />
+                        android:src="@drawable/flat_camisa"
+                        android:paddingLeft="15dp" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -335,7 +337,9 @@
         android:layout_below="@id/hsvFlat"
         android:text="Recomendamos para você:"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp"
+        android:textColor="#904098"
+        android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="fill_parent"

@@ -28,9 +28,7 @@ import com.example.guilherme.demoappdress.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -39,19 +37,12 @@ public class IndicacaoActivity extends Activity {
     //region #VARIAVEIS#
     // variaveis de layout
     HorizontalScrollView horizontalScrollView;
-    LinearLayout grd1_1, grd1_2, grd1_3,grd1_4, grd1_5, grd1_6 ;
-    LinearLayout grd2_1, grd2_2, grd2_3,grd2_4, grd2_5, grd2_6 ;
-    LinearLayout.LayoutParams params, params2;
     ArrayList<LinearLayout> layouts, layouts2;
     TextView txtDescription ;
-    RelativeLayout next, prev;
-    int viewWidth;
-    int mWidth;
 
     //variaveis de deteccao de gestos
     GestureDetector gestureDetector = null;
-    int parentLeft, parentRight;
-    int currPosition, prevPosition;
+    int currPosition;
 
     //variaveis de contexto
     private Context context;
@@ -90,110 +81,10 @@ public class IndicacaoActivity extends Activity {
         mapPecaQuantity = roupaLogic.quantifier(periodo, genero, nivelTemperatura);
         HashMap<Integer, List<Peca>> listPeca = roupaLogic.getRoupaIndication(getApplicationContext(),nivelTemperatura, genero);
 
-
-
-
-       // Toast.makeText(IndicacaoActivity.this, "Temperatura = " + String.valueOf(nivelTemperatura), Toast.LENGTH_LONG).show();
-
         loadFlatIconLayout(mapPecaQuantity);
         loadImagaPecaLayout(listPeca);
-       // loadLayou1t();
     }
 
-//    private void loadLayou1t(){
-//        prev = (RelativeLayout) findViewById(R.id.prev);
-//        next = (RelativeLayout) findViewById(R.id.next);
-//        horizontalScrollView = (HorizontalScrollView) findViewById(R.id.hsv);
-//        gestureDetector = new GestureDetector(new MyGestureDetector());
-//        grd1_1 = (LinearLayout) findViewById(R.id.grd1_1);
-//        grd1_2 = (LinearLayout) findViewById(R.id.grd1_2);
-//        grd1_3 = (LinearLayout) findViewById(R.id.grd1_3);
-//        grd1_4 = (LinearLayout) findViewById(R.id.grd1_4);
-//        grd1_5 = (LinearLayout) findViewById(R.id.grd1_5);
-//        grd1_6 = (LinearLayout) findViewById(R.id.grd1_6);
-//
-//        grd2_1 = (LinearLayout) findViewById(R.id.grd2_1);
-//        grd2_2 = (LinearLayout) findViewById(R.id.grd2_2);
-//        grd2_3 = (LinearLayout) findViewById(R.id.grd2_3);
-//        grd2_4 = (LinearLayout) findViewById(R.id.grd2_4);
-//        grd2_5 = (LinearLayout) findViewById(R.id.grd2_5);
-//        grd2_6 = (LinearLayout) findViewById(R.id.grd2_6);
-//
-//        Display display = getWindowManager().getDefaultDisplay();
-//        mWidth = display.getWidth(); // deprecated
-//        viewWidth = mWidth / 3;
-//        layouts = new ArrayList<LinearLayout>();
-//        params = new LinearLayout.LayoutParams(viewWidth, LinearLayout.LayoutParams.WRAP_CONTENT);
-//
-//        grd1_1.setLayoutParams(params);
-//        grd1_2.setLayoutParams(params);
-//        grd1_3.setLayoutParams(params);
-//        grd1_4.setLayoutParams(params);
-//        grd1_5.setLayoutParams(params);
-//        grd1_6.setLayoutParams(params);
-//
-//        layouts.add(grd1_1);
-//        layouts.add(grd1_2);
-//        layouts.add(grd1_3);
-//        layouts.add(grd1_4);
-//        layouts.add(grd1_5);
-//        layouts.add(grd1_6);
-//
-//        layouts2 = new ArrayList<LinearLayout>();
-//        params2 = new LinearLayout.LayoutParams(viewWidth, LinearLayout.LayoutParams.WRAP_CONTENT);
-//
-//        grd2_1.setLayoutParams(params2);
-//        grd2_2.setLayoutParams(params2);
-//        grd2_3.setLayoutParams(params2);
-//        grd2_4.setLayoutParams(params2);
-//        grd2_5.setLayoutParams(params2);
-//        grd2_6.setLayoutParams(params2);
-//
-//        layouts2.add(grd2_1);
-//        layouts2.add(grd2_2);
-//        layouts2.add(grd2_3);
-//        layouts2.add(grd2_4);
-//        layouts2.add(grd2_5);
-//        layouts2.add(grd2_6);
-//
-//        next.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new Handler().postDelayed(new Runnable() {
-//                    public void run() {
-//                        horizontalScrollView.smoothScrollTo(
-//                                (int) horizontalScrollView.getScrollX()
-//                                        + viewWidth,
-//                                (int) horizontalScrollView.getScrollY());
-//                    }
-//                }, 100L);
-//            }
-//        });
-//
-//        prev.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new Handler().postDelayed(new Runnable() {
-//                    public void run() {
-//                        horizontalScrollView.smoothScrollTo(
-//                                (int) horizontalScrollView.getScrollX()
-//                                        - viewWidth,
-//                                (int) horizontalScrollView.getScrollY());
-//                    }
-//                }, 100L);
-//            }
-//        });
-//
-//        horizontalScrollView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (gestureDetector.onTouchEvent(event)) {
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
-//    }
 
     //Carrega os icones dos tipos de roupas
     private void loadFlatIconLayout(HashMap<Integer, Integer> listaPecas){
@@ -226,6 +117,7 @@ public class IndicacaoActivity extends Activity {
             HashMap<Integer,String> pecaMap = tipoPeca.getPecaImageMap();
 
             flaticon.setLayoutParams(insideParams);
+            flaticon.setPadding(15,0,0,0);
             flaticon.setImageResource(getResources().getIdentifier(pecaMap.get(h.getKey()), "drawable", getPackageName()));
 
             // Adds the view to the layout
@@ -238,10 +130,8 @@ public class IndicacaoActivity extends Activity {
 
     private void loadImagaPecaLayout(HashMap<Integer, List<Peca>> mapPeca){
 
-        int quantity = mapPeca.size();
-        int atual = -1;
+
         int lastHsvId = 0;
-        int lastLogoId = 0;
         boolean isFirst = true;
         final float scale = getResources().getDisplayMetrics().density;
         DecimalFormat precision = new DecimalFormat("0.00");
@@ -275,7 +165,6 @@ public class IndicacaoActivity extends Activity {
             LinearLayout.LayoutParams imgParams2 = new LinearLayout.LayoutParams((int) (150 * scale), LinearLayout.LayoutParams.WRAP_CONTENT);
             imageLogo.setLayoutParams(imgParams2);
             imageLogo.setImageResource(getResources().getIdentifier("logo_".concat(String.valueOf(mapItem.getKey())), "drawable", getPackageName()));
-            //imageLogo.setImageResource(R.drawable.rennerlogo);
 
             hImage.addView(imageLogo);
 
@@ -285,13 +174,7 @@ public class IndicacaoActivity extends Activity {
             horizontal.setId(currentHsvId);
             hparams.setMargins(0,10,0,0);
             hparams.addRule(RelativeLayout.BELOW, hImage.getId());
-//            if (!isFirst) {
-//                Log.i("eh o primeiro ", "Nao");
-//                hparams.addRule(RelativeLayout.BELOW, lastHsvId);
-//                lastHsvId = currentHsvId;
-//            }else {
-//                Log.i("eh o primeiro ", "Sim");
-//            }
+
             horizontal.setLayoutParams(hparams);
             horizontal.setHorizontalScrollBarEnabled(false);
 
@@ -318,7 +201,6 @@ public class IndicacaoActivity extends Activity {
                 LinearLayout.LayoutParams imgParams = new LinearLayout.LayoutParams((int) (150 * scale), LinearLayout.LayoutParams.WRAP_CONTENT);
                 imagePeca.setLayoutParams(imgParams);
                  imagePeca.setImageResource(getResources().getIdentifier("img_".concat(String.valueOf(p.getId())), "drawable", getPackageName()));
-                //imagePeca.setImageResource(R.drawable.bermuda);
 
                 TextView textSeparator = new TextView(this);
                 RelativeLayout.LayoutParams separatorParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, 2);

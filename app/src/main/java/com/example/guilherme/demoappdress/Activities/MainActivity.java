@@ -127,10 +127,10 @@ public class MainActivity extends AppCompatActivity {
             genre = 'F';
         }
 
-//        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA GATO
-        txtDate.setText("23/4/2016");
-        txtMonth = "4";
-        spinnerDestiny.setSelection(3);
+////        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA GATO
+//        txtDate.setText("23/4/2016");
+//        txtMonth = "4";
+//        spinnerDestiny.setSelection(3);
 
 
         if(isValidActivity()){

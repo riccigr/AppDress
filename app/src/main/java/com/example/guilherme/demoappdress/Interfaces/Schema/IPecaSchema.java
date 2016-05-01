@@ -80,7 +80,7 @@ public interface IPecaSchema {
             + ",  (2, 12, '', '', 'U', 80.90, "+"\"http://www.dafiti.com.br/Calca-Legging-Question-Sport-Termica-Run-Preta-2066093.html\""+") "
             + ",  (2, 19, '', '', 'U', 99.90, "+"\"http://www.dafiti.com.br/Meia-Termica-Fiero-Dupla-Camada-Azul-Marinho-1983240.html\""+") "
             + ",  (2, 8, '', '', 'M', 621.80, "+"\"http://www.dafiti.com.br/Sobretudo-fiero-em-la-moscow-cinza-escuro-2101964.html\""+") "
-            + ",  (4, 8, '', '', 'U', 229.95, "+"\"http://www.marisa.com.br/casaco-feminino-modelo-trench-coat-10024667760-160947-azul-detalhe\""+") "
+            + ",  (4, 8, '', '', 'F', 229.95, "+"\"http://www.marisa.com.br/casaco-feminino-modelo-trench-coat-10024667760-160947-azul-detalhe\""+") "
             + ""
             + ";";
 }
