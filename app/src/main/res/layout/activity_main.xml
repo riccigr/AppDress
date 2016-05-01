@@ -14,7 +14,8 @@
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:padding="5dp" />
+        android:padding="5dp"
+        android:textColor="#904098" />
 
     <Spinner
         android:layout_width="match_parent"
@@ -33,7 +34,8 @@
         android:id="@+id/textView2"
         android:layout_alignParentStart="true"
         android:padding="5dp"
-        android:layout_below="@+id/spinnerDestino" />
+        android:layout_below="@+id/spinnerDestino"
+        android:textColor="#904098" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,7 +45,8 @@
         android:id="@+id/textView3"
         android:layout_alignParentStart="true"
         android:padding="5dp"
-        android:layout_below="@+id/txtData" />
+        android:layout_below="@+id/txtData"
+        android:textColor="#904098" />
 
     <SeekBar
         android:layout_width="match_parent"
@@ -54,7 +57,10 @@
         android:layout_below="@+id/textView3"
         android:layout_toEndOf="@+id/seekBarValue"
         android:padding="5dp"
-        android:progress="5" />
+        android:progress="5"
+        android:thumbTint="#00b8cc"
+        android:splitTrack="false"
+        android:progressTint="#00b8cc" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,7 +70,8 @@
         android:id="@+id/seekBarValue"
         android:layout_alignBottom="@+id/periodoSeekBar"
         android:layout_alignParentStart="true"
-        android:padding="5dp" />
+        android:padding="5dp"
+        android:textColor="#904098" />
 
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
@@ -80,7 +87,8 @@
             android:text=""
             android:id="@+id/femaleRadioButton"
             android:checked="false"
-            android:drawableRight="@drawable/female" />
+            android:drawableRight="@drawable/female"
+            android:buttonTint="#904098" />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,7 +96,10 @@
             android:id="@+id/mascRadioButton"
             android:checked="true"
             android:layout_marginStart="53dp"
-            android:drawableRight="@drawable/male" />
+            android:drawableRight="@drawable/male"
+            android:textColor="#00B8CC"
+            android:contextClickable="true"
+            android:buttonTint="#904098" />
     </RadioGroup>
 
     <Button
@@ -98,7 +109,9 @@
         android:id="@+id/searchButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="searchButton" />
+        android:onClick="searchButton"
+        android:backgroundTint="#904098"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:layout_width="match_parent"
@@ -117,6 +130,8 @@
         android:nestedScrollingEnabled="true"
         android:onClick="showCalendar"
         android:layout_alignBottom="@+id/txtData"
-        android:layout_alignEnd="@+id/periodoSeekBar" />
+        android:layout_alignEnd="@+id/periodoSeekBar"
+        android:backgroundTint="#00B8CC"
+        android:adjustViewBounds="false" />
 
 </RelativeLayout>

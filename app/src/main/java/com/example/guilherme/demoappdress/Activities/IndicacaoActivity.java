@@ -430,5 +430,6 @@ public class IndicacaoActivity extends Activity {
     }
 }
 
-//TODO Corrigir espacamento da numeracao do flat
-//TODO corrigir onclick no cart
+//TODO Cor do datapciker
+//TODO cor da segunda parte
+//TODO Cor do title
