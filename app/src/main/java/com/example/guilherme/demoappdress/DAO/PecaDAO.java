@@ -12,11 +12,9 @@ import com.example.guilherme.demoappdress.POJO.Peca;
 import com.example.guilherme.demoappdress.Provider.DbContentProvider;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Guilherme on 21/04/2016.
- */
 public class PecaDAO extends DbContentProvider implements IPecaDAO, IPecaSchema {
 
     public PecaDAO(SQLiteDatabase db){
@@ -24,12 +22,12 @@ public class PecaDAO extends DbContentProvider implements IPecaDAO, IPecaSchema 
     }
 
     @Override
-    public List<Peca> getListPecas(List<Integer> listTipoPeca, char genero) {
-
-        Log.i("CAÇA", String.valueOf("entrou no getlisPecas"));
+    public List<Peca> getListPecasByLoja(List<Integer> listTipoPeca, char genero, int idLoja) {
 
         String sqlQuestionMark = " ";
         List<Peca> listPeca = new ArrayList<>();
+        HashMap<Integer, List<Peca>> mapPeca = new HashMap<>();
+        int currentLoja = -1;
 
         for (int i = 0; i <  listTipoPeca.size(); i++) {
             if (i < listTipoPeca.size() -1 ){
@@ -41,8 +39,9 @@ public class PecaDAO extends DbContentProvider implements IPecaDAO, IPecaSchema 
         }
 
         final String columnsArgs[] = PECA_COLUMNS;
-        final String selection =  COLUMN_TIPO_PECA + " IN ( " + sqlQuestionMark + " ) AND " + COLUMN_GENERO + " IN (?,?)  ";
-        final String selectionArgs[] =  new String[listTipoPeca.size() + 2];
+        final String selection =  COLUMN_TIPO_PECA + " IN ( " + sqlQuestionMark + " ) AND " + COLUMN_GENERO + " IN (?,?)  AND " + COLUMN_LOJA_ID + " = ?";
+        final String selectionArgs[] =  new String[listTipoPeca.size() + 3];
+        final String orderBy = COLUMN_LOJA_ID;
 
         for (int cont = 0; cont < listTipoPeca.size(); cont++){
             selectionArgs[cont] = String.valueOf(listTipoPeca.get(cont));
@@ -50,9 +49,10 @@ public class PecaDAO extends DbContentProvider implements IPecaDAO, IPecaSchema 
 
         selectionArgs[listTipoPeca.size()] = String.valueOf(genero).toUpperCase();
         selectionArgs[listTipoPeca.size() +1 ] =  String.valueOf('U');
+        selectionArgs[listTipoPeca.size() +2 ] =  String.valueOf(idLoja);
 
         try{
-            Cursor c = mDb.query(false, PECA_TABLE, columnsArgs , selection, selectionArgs, null, null, null, null );
+            Cursor c = mDb.query(false, PECA_TABLE, columnsArgs , selection, selectionArgs, null, null, orderBy, null );
             int idPecaIndex = c.getColumnIndex("id");
             int idLojaIndex = c.getColumnIndex("loja_id");
             int precoIndex = c.getColumnIndex("preco");
@@ -75,7 +75,7 @@ public class PecaDAO extends DbContentProvider implements IPecaDAO, IPecaSchema 
             c.close();
 
         }catch (Exception e){
-            Log.e("ERRO>>>", "getListPecas: " + e.getMessage());
+            Log.e("ERRO>>>", "getListPecasByLoja: " + e.getMessage());
             throw new SQLiteDatabaseCorruptException();
         }
 

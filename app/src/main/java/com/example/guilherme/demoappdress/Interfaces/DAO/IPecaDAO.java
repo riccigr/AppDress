@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface IPecaDAO {
 
-    public List<Peca> getListPecas(List<Integer> tipoPeca, char genero);
+    public List<Peca> getListPecasByLoja(List<Integer> tipoPeca, char genero, int idLoja);
 
 }

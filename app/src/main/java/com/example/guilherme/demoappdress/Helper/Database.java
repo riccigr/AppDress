@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.guilherme.demoappdress.DAO.ClassificacaoDAO;
 import com.example.guilherme.demoappdress.DAO.ClimaDAO;
+import com.example.guilherme.demoappdress.DAO.LojaDAO;
 import com.example.guilherme.demoappdress.DAO.PecaDAO;
 
 import java.sql.SQLException;
@@ -21,6 +22,7 @@ public class Database {
     public static ClimaDAO mClimaDAO;
     public static ClassificacaoDAO mClassificacaoDAO;
     public static PecaDAO mPecaDAO;
+    public static LojaDAO mLojaDAO;
 
     public Database open() throws SQLException {
         mDbHelper = new DatabaseHelper(mContext);
@@ -29,6 +31,7 @@ public class Database {
         mClimaDAO = new ClimaDAO(mDb);
         mClassificacaoDAO = new ClassificacaoDAO(mDb);
         mPecaDAO = new PecaDAO(mDb);
+        mLojaDAO = new LojaDAO(mDb);
 
         return this;
     }

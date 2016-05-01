@@ -1,6 +1,8 @@
 package com.example.guilherme.demoappdress.POJO;
 
 
+import java.util.Comparator;
+
 public class Peca {
 
     private String nome;
@@ -66,6 +68,19 @@ public class Peca {
         this.id = id;
     }
 
+    public class CompareByLojaId implements Comparator<Peca>{
+        public int compare (Peca p1, Peca p2){
+            if(p1.getLojaId() > p2.getLojaId()){
+                return 1;
+            }
+            else  if(p1.getLojaId() < p2.getLojaId()){
+                return -11;
+            }
+            else{
+                return 0;
+            }
+        }
+    }
 
 
 

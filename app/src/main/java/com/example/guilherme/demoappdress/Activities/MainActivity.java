@@ -128,9 +128,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
 //        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA GATO
-//        txtDate.setText("23/4/2016");
-//        txtMonth = "4";
-//        spinnerDestiny.setSelection(3);
+        txtDate.setText("23/4/2016");
+        txtMonth = "4";
+        spinnerDestiny.setSelection(3);
 
 
         if(isValidActivity()){
