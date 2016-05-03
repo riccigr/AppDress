@@ -151,14 +151,14 @@ public class MainActivity extends AppCompatActivity {
 
         boolean valid = true;
 
-        if(txtDate.getText() == null || txtDate.getText().equals("")){
-            Toast.makeText(MainActivity.this, "Quando vai viajar?", Toast.LENGTH_SHORT).show();
-           return false;
-        }
-
         if(spinnerDestiny.getSelectedItem() == null || spinnerDestiny.getSelectedItem().toString().equals("Selecione...") || spinnerDestiny.getSelectedItem().toString().equals("") ){
             Toast.makeText(MainActivity.this, "Qual o seu destino?", Toast.LENGTH_SHORT).show();
             return false;
+        }
+
+        if(txtDate.getText() == null || txtDate.getText().equals("")){
+            Toast.makeText(MainActivity.this, "Quando vai viajar?", Toast.LENGTH_SHORT).show();
+           return false;
         }
 
         return valid;

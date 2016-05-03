@@ -7,355 +7,373 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Activities.IndicacaoActivity">
+    tools:context=".Activities.IndicacaoActivity"
+    android:background="#ffffff"
+    android:id="@+id/relMasterIndicacao">
 
 
-    <TextView
-        android:id="@+id/txtDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fullscreenView"
         android:layout_alignParentTop="true"
-        android:text="É esperado temperaturas extremamente baixas, com média de 7ºC. Vista-se com diversas camadas e procure roupas impermeáveis porque a chances de nevar"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#904098" />
+        android:visibility="invisible"
+        android:onClick="zoomOut"
+        android:nestedScrollingEnabled="true"
+        android:background="#FFFFFF" />
 
-    <HorizontalScrollView
-        android:id="@+id/hsvFlat"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtDescription"
-        android:fillViewport="true"
-        android:measureAllChildren="false"
-        android:scrollbars="none"
-        android:paddingTop="10dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff">
 
-        <LinearLayout
-            android:id="@+id/innerLayFlat"
+        <TextView
+            android:id="@+id/txtDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="É esperado temperaturas extremamente baixas, com média de 7ºC. Vista-se com diversas camadas e procure roupas impermeáveis porque a chances de nevar"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#904098" />
+
+        <HorizontalScrollView
+            android:id="@+id/hsvFlat"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtDescription"
+            android:fillViewport="true"
+            android:measureAllChildren="false"
+            android:scrollbars="none"
+            android:paddingTop="10dp">
 
             <LinearLayout
-                android:id="@+id/grdFlat1"
-                android:layout_width="80dp"
+                android:id="@+id/innerLayFlat"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/grdFlat1"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/counter1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="33dp"
-                        android:autoText="false"
-                        android:gravity="center"
-                        android:paddingRight="5dp"
-                        android:singleLine="true"
-                        android:text="10-"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/flat1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@drawable/flat_camisa"
-                        android:paddingLeft="15dp" />
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/counter1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="33dp"
+                            android:autoText="false"
+                            android:gravity="center"
+                            android:paddingRight="5dp"
+                            android:singleLine="true"
+                            android:text="10-"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <ImageView
+                            android:id="@+id/flat1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:src="@drawable/flat_camisa"
+                            android:paddingLeft="15dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/grdFlat2"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/counter2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="33dp"
+                            android:autoText="false"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="5-"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <ImageView
+                            android:id="@+id/flat2"
+                            android:layout_width="wrap_content"
+
+                            android:layout_height="40dp"
+                            android:src="@drawable/flat_bermuda" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/grdFlat3"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/counter3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="33dp"
+                            android:autoText="false"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="2-"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <ImageView
+                            android:id="@+id/flat3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:src="@drawable/flat_calca" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/grdFlat4"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/counter4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="33dp"
+                            android:autoText="false"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="4-"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <ImageView
+                            android:id="@+id/flat4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:src="@drawable/flat_meia" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/grdFlat5"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/counter5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="33dp"
+                            android:autoText="false"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="1-"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <ImageView
+                            android:id="@+id/flat5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:src="@drawable/flat_tenis" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/grdFlat6"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/counter6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="33dp"
+                            android:autoText="false"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="1-"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <ImageView
+                            android:id="@+id/flat6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:src="@drawable/flat_chinelo" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/grdFlat7"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/counter7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="33dp"
+                            android:autoText="false"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="1-"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <ImageView
+                            android:id="@+id/flat7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:src="@drawable/flat_bone" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/grdFlat10"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/counter10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="33dp"
+                            android:autoText="false"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="1-"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <ImageView
+                            android:id="@+id/flat10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:src="@drawable/flat_oculos" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/grdFlat8"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/counter8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="33dp"
+                            android:autoText="false"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="1-"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <ImageView
+                            android:id="@+id/flat8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:src="@drawable/flat_regata" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/grdFlat9"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/counter9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="33dp"
+                            android:autoText="false"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="1-"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <ImageView
+                            android:id="@+id/flat9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:src="@drawable/flat_cueca" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+
             </LinearLayout>
+        </HorizontalScrollView>
 
-            <LinearLayout
-                android:id="@+id/grdFlat2"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/counter2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="33dp"
-                        android:autoText="false"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:text="5-"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <ImageView
-                        android:id="@+id/flat2"
-                        android:layout_width="wrap_content"
-
-                        android:layout_height="40dp"
-                        android:src="@drawable/flat_bermuda" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/grdFlat3"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/counter3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="33dp"
-                        android:autoText="false"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:text="2-"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <ImageView
-                        android:id="@+id/flat3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@drawable/flat_calca" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/grdFlat4"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/counter4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="33dp"
-                        android:autoText="false"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:text="4-"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <ImageView
-                        android:id="@+id/flat4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@drawable/flat_meia" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/grdFlat5"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/counter5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="33dp"
-                        android:autoText="false"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:text="1-"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <ImageView
-                        android:id="@+id/flat5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@drawable/flat_tenis" />
-                </RelativeLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/grdFlat6"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/counter6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="33dp"
-                        android:autoText="false"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:text="1-"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <ImageView
-                        android:id="@+id/flat6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@drawable/flat_chinelo" />
-                </RelativeLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/grdFlat7"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/counter7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="33dp"
-                        android:autoText="false"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:text="1-"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <ImageView
-                        android:id="@+id/flat7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@drawable/flat_bone" />
-                </RelativeLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/grdFlat10"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/counter10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="33dp"
-                        android:autoText="false"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:text="1-"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <ImageView
-                        android:id="@+id/flat10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@drawable/flat_oculos" />
-                </RelativeLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/grdFlat8"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/counter8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="33dp"
-                        android:autoText="false"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:text="1-"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <ImageView
-                        android:id="@+id/flat8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@drawable/flat_regata" />
-                </RelativeLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/grdFlat9"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/counter9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="33dp"
-                        android:autoText="false"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:text="1-"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <ImageView
-                        android:id="@+id/flat9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@drawable/flat_cueca" />
-                </RelativeLayout>
-            </LinearLayout>
-
-
-        </LinearLayout>
-    </HorizontalScrollView>
-
-    <TextView
-        android:id="@+id/txtRecomenda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/hsvFlat"
-        android:text="Recomendamos para você:"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:paddingTop="10dp"
-        android:textColor="#904098"
-        android:textStyle="bold" />
-
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignEnd="@+id/txtDescription"
-        android:layout_below="@id/txtRecomenda"
-        android:orientation="vertical">
-
-        <RelativeLayout
+        <TextView
+            android:id="@+id/txtRecomenda"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/relMaster">
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/hsvFlat"
+            android:text="Recomendamos para você:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:paddingTop="10dp"
+            android:textColor="#904098"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignEnd="@+id/txtDescription"
+            android:layout_below="@id/txtRecomenda"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/relMaster">
 
 
-        </RelativeLayout>
-    </ScrollView>
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
 
 </RelativeLayout>

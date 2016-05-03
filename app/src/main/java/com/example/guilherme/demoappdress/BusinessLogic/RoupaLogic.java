@@ -163,9 +163,9 @@ public class RoupaLogic {
 
     public HashMap<Integer, List<Peca>> getRoupaIndication(Context applicationContext, int temperatureLevel, char genre) {
 
-        List<Integer> listTipo = new ArrayList<>();
-        List<Peca> listPecas = new ArrayList<>();
-        List<Integer> listLoja = new ArrayList<>();
+        List<Integer> listTipo;
+        List<Peca> listPecas;
+        List<Integer> listLoja;
         HashMap<Integer, List<Peca>> mapPeca = new HashMap<>();
 
         Database db = new Database(applicationContext);
@@ -181,21 +181,10 @@ public class RoupaLogic {
 
             if (listTipo != null && listTipo.size() > 0 && listLoja != null && listLoja.size() > 0) {
                 for (Integer idLoja : listLoja ) {
-                    Log.e("getRoupaIndication: ", "ID Loja: " + String.valueOf(idLoja));
                     listPecas = db.mPecaDAO.getListPecasByLoja(listTipo, genre, idLoja);
                     mapPeca.put(idLoja,listPecas);
                 }
-            }else{
-                Log.e("Erro: ", "Lista tipo ou loja vazia");
             }
-
-//            for ( Peca p : listPecas ) {
-//                Log.i("id", String.valueOf(p.getId()));
-//                Log.i("Loja", String.valueOf(p.getLojaId()));
-//                Log.i("preco", String.valueOf(p.getPreco()));
-//                Log.i("link", String.valueOf(p.getLink()));
-//                Log.i("tipo", String.valueOf(p.getTipoRoupa()));
-//            }
 
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -32,7 +32,6 @@ public class ClimaDAO extends DbContentProvider implements IClimaSchema, IClimaD
 
                 for(int i= 1; i <= c.getCount(); i++){
                     temperatura = c.getDouble(tempMediaIndex);
-                //    Log.i("TEMPERATURA", String.valueOf(temperatura) );
                 }
             }
             c.close();

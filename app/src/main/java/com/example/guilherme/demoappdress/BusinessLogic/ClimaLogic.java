@@ -15,9 +15,6 @@ public class ClimaLogic {
 
         int level = 0;
 
-        Log.i("mes", String.valueOf(month));
-        Log.i("cidade", String.valueOf(destiny));
-
         Database db = new Database(applicationContext);
         try {
             db.open();

@@ -113,8 +113,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="searchButton"
-        android:backgroundTint="#904098"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:background="#904098"
+        android:allowUndo="true" />
 
     <TextView
         android:layout_width="match_parent"
@@ -134,7 +135,7 @@
         android:onClick="showCalendar"
         android:layout_alignBottom="@+id/txtData"
         android:layout_alignEnd="@+id/periodoSeekBar"
-        android:backgroundTint="#00B8CC"
-        android:adjustViewBounds="false" />
+        android:adjustViewBounds="true"
+        android:background="#00B8CC" />
 
 </RelativeLayout>

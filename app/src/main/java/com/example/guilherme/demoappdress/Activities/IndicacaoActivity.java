@@ -3,17 +3,18 @@ package com.example.guilherme.demoappdress.Activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
-import android.os.Handler;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import com.example.guilherme.demoappdress.BusinessLogic.ClimaLogic;
 import com.example.guilherme.demoappdress.BusinessLogic.RoupaLogic;
 import com.example.guilherme.demoappdress.Constants.TipoPeca;
+import com.example.guilherme.demoappdress.Helper.ImageLoaderHelper;
 import com.example.guilherme.demoappdress.POJO.Peca;
 import com.example.guilherme.demoappdress.R;
 
@@ -100,7 +102,7 @@ public class IndicacaoActivity extends Activity {
             ImageView flaticon = new ImageView(this);
 
             //Layout configuration
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(170, LinearLayout.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(200, LinearLayout.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
             LinearLayout.LayoutParams insideParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80, Gravity.CENTER);
             RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 
@@ -141,125 +143,139 @@ public class IndicacaoActivity extends Activity {
         for (HashMap.Entry<Integer, List<Peca>> mapItem : mapPeca.entrySet()) {
 
             List<Peca> listItem = mapItem.getValue();
-            Log.i("loja id: ", String.valueOf(mapItem.getKey()));
 
-            int currentHsvId = View.generateViewId();
-            int currentLogoId = View.generateViewId();
+            if(listItem.size() > 0) {
 
-            HorizontalScrollView hImage = new HorizontalScrollView(this);
-            RelativeLayout.LayoutParams hImageparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                int currentHsvId = View.generateViewId();
+                int currentLogoId = View.generateViewId();
 
-            hImage.setId(currentLogoId);
-            if (!isFirst) {
-                Log.i("eh o primeiro ", "Nao");
-                hImageparams.addRule(RelativeLayout.BELOW, lastHsvId);
-                lastHsvId = currentHsvId;
-            }else {
-                Log.i("eh o primeiro ", "Sim");
-            }
-            hImageparams.setMargins(0, 30, 0, 0);
-            hImage.setLayoutParams(hImageparams);
-            hImage.setHorizontalScrollBarEnabled(false);
+                HorizontalScrollView hImage = new HorizontalScrollView(this);
+                RelativeLayout.LayoutParams hImageparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-            ImageView imageLogo = new ImageView(this);
-            LinearLayout.LayoutParams imgParams2 = new LinearLayout.LayoutParams((int) (150 * scale), LinearLayout.LayoutParams.WRAP_CONTENT);
-            imageLogo.setLayoutParams(imgParams2);
-            imageLogo.setImageResource(getResources().getIdentifier("logo_".concat(String.valueOf(mapItem.getKey())), "drawable", getPackageName()));
-
-            hImage.addView(imageLogo);
-
-
-            HorizontalScrollView horizontal = new HorizontalScrollView(this);
-            RelativeLayout.LayoutParams hparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, (int) (150 * scale));
-            horizontal.setId(currentHsvId);
-            hparams.setMargins(0,10,0,0);
-            hparams.addRule(RelativeLayout.BELOW, hImage.getId());
-
-            horizontal.setLayoutParams(hparams);
-            horizontal.setHorizontalScrollBarEnabled(false);
-
-            LinearLayout innerLinear = new LinearLayout(this);
-            LinearLayout.LayoutParams innerParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,  LinearLayout.LayoutParams.WRAP_CONTENT, Gravity.CENTER_VERTICAL);
-            innerLinear.setLayoutParams(innerParams);
-            innerLinear.setOrientation(LinearLayout.HORIZONTAL);
-
-            for (final Peca p : listItem) {
-
-                //region #monta layout dinamico#
-                LinearLayout grd = new LinearLayout(this);
-                LinearLayout.LayoutParams grdParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-                grd.setLayoutParams(grdParams);
-                grd.setOrientation(LinearLayout.VERTICAL);
-                grd.setPadding(0, 0, 10, 0);
-                Log.i("<>", String.valueOf(p.getLink()));
-
-                RelativeLayout relImage = new RelativeLayout(this);
-                RelativeLayout.LayoutParams relImageParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, (int) (100 * scale));
-                relImage.setLayoutParams(relImageParams);
-
-                ImageView imagePeca = new ImageView(this);
-                LinearLayout.LayoutParams imgParams = new LinearLayout.LayoutParams((int) (150 * scale), LinearLayout.LayoutParams.WRAP_CONTENT);
-                imagePeca.setLayoutParams(imgParams);
-                 imagePeca.setImageResource(getResources().getIdentifier("img_".concat(String.valueOf(p.getId())), "drawable", getPackageName()));
-
-                TextView textSeparator = new TextView(this);
-                RelativeLayout.LayoutParams separatorParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, 2);
-                separatorParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                textSeparator.setLayoutParams(separatorParams);
-
-                relImage.addView(imagePeca);
-                relImage.addView(textSeparator);
-
-                RelativeLayout relBuy = new RelativeLayout(this);
-                RelativeLayout.LayoutParams relBuyParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-                relBuy.setLayoutParams(relBuyParams);
-
-                TextView txtPreco = new TextView(this);
-                txtPreco.setId(p.getId());
-                RelativeLayout.LayoutParams txtPrecoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                txtPrecoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                txtPrecoParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-                txtPreco.setGravity(Gravity.CENTER_VERTICAL);
-                txtPreco.setLayoutParams(txtPrecoParams);
-                txtPreco.setTextAppearance(this, android.R.style.TextAppearance_DeviceDefault_Medium);
-                txtPreco.setText("R$ ".concat(String.valueOf(precision.format(p.getPreco()))));
-
-
-                ImageView imageCart = new ImageView(this);
-                RelativeLayout.LayoutParams cartParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                cartParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-                cartParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                cartParams.addRule(RelativeLayout.START_OF, p.getId());
-                imageCart.setLayoutParams(cartParams);
-                imageCart.setImageResource(R.drawable.cart);
-                imageCart.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Uri uri = Uri.parse(p.getLink());
-                        Intent intent = new Intent("android.intent.action.VIEW", Uri.parse(String.valueOf(p.getLink())));
-                        startActivity(intent);
-                    }
-                });
-                //endregion
-
-                relBuy.addView(txtPreco);
-                relBuy.addView(imageCart);
-
-                // Adds the view to the layout
-                grd.addView(relImage);
-                grd.addView(relBuy);
-                innerLinear.addView(grd);
-
-                if (isFirst) {
+                hImage.setId(currentLogoId);
+                if (!isFirst) {
+                    hImageparams.addRule(RelativeLayout.BELOW, lastHsvId);
                     lastHsvId = currentHsvId;
-                    isFirst = false;
                 }
+                hImageparams.setMargins(0, 30, 0, 0);
+                hImage.setBackgroundColor(Color.WHITE);
+                hImage.setLayoutParams(hImageparams);
+                hImage.setHorizontalScrollBarEnabled(false);
+
+                ImageView imageLogo = new ImageView(this);
+                LinearLayout.LayoutParams imgParams2 = new LinearLayout.LayoutParams((int) (150 * scale), LinearLayout.LayoutParams.WRAP_CONTENT);
+                imageLogo.setLayoutParams(imgParams2);
+
+                Bitmap bm = ImageLoaderHelper.decodeSampledBitmapFromResource(getResources(), getResources().getIdentifier("logo_".concat(String.valueOf(mapItem.getKey())), "drawable", getPackageName()), 150, 35);
+                imageLogo.setImageBitmap(bm);
+               // imageLogo.setImageResource(getResources().getIdentifier("logo_".concat(String.valueOf(mapItem.getKey())), "drawable", getPackageName()));
+                hImage.addView(imageLogo);
+
+                HorizontalScrollView horizontal = new HorizontalScrollView(this);
+                RelativeLayout.LayoutParams hparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, (int) (150 * scale));
+                horizontal.setId(currentHsvId);
+                horizontal.setBackgroundColor(Color.WHITE);
+                hparams.setMargins(0, 10, 0, 0);
+                hparams.addRule(RelativeLayout.BELOW, hImage.getId());
+
+                horizontal.setLayoutParams(hparams);
+                horizontal.setHorizontalScrollBarEnabled(false);
+
+                LinearLayout innerLinear = new LinearLayout(this);
+                LinearLayout.LayoutParams innerParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, Gravity.CENTER_VERTICAL);
+                innerLinear.setLayoutParams(innerParams);
+                innerLinear.setOrientation(LinearLayout.HORIZONTAL);
+
+                for (final Peca p : listItem) {
+
+                    //region #monta layout dinamico#
+                    LinearLayout grd = new LinearLayout(this);
+                    LinearLayout.LayoutParams grdParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+                    grd.setLayoutParams(grdParams);
+                    grd.setOrientation(LinearLayout.VERTICAL);
+                    grd.setPadding(0, 0, 10, 0);
+
+                    RelativeLayout relImage = new RelativeLayout(this);
+                    RelativeLayout.LayoutParams relImageParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, (int) (100 * scale));
+                    relImage.setLayoutParams(relImageParams);
+
+                    ImageView imagePeca = new ImageView(this);
+                    LinearLayout.LayoutParams imgParams = new LinearLayout.LayoutParams((int) (150 * scale), LinearLayout.LayoutParams.WRAP_CONTENT);
+                    imagePeca.setLayoutParams(imgParams);
+
+                    Bitmap bmp = ImageLoaderHelper.decodeSampledBitmapFromResource(getResources(), getResources().getIdentifier("img_".concat(String.valueOf(p.getId())), "drawable", getPackageName()), 70, 70);
+
+                    imagePeca.setImageBitmap(bmp);
+
+                    imagePeca.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ImageView fullscreenView = (ImageView) findViewById(R.id.fullscreenView);
+                            fullscreenView.setVisibility(View.VISIBLE);
+                            fullscreenView.setImageResource(getResources().getIdentifier("img_".concat(String.valueOf(p.getId())), "drawable", getPackageName()));
+                            fullscreenView.bringToFront();
+                        }
+                    });
+
+                    //imagePeca.setImageResource(getResources().getIdentifier("img_".concat(String.valueOf(p.getId())), "drawable", getPackageName()));
+
+                    TextView textSeparator = new TextView(this);
+                    RelativeLayout.LayoutParams separatorParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, 2);
+                    separatorParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    textSeparator.setLayoutParams(separatorParams);
+
+                    relImage.addView(imagePeca);
+                    relImage.addView(textSeparator);
+
+                    RelativeLayout relBuy = new RelativeLayout(this);
+                    RelativeLayout.LayoutParams relBuyParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+                    relBuy.setLayoutParams(relBuyParams);
+
+                    TextView txtPreco = new TextView(this);
+                    txtPreco.setId(p.getId());
+                    RelativeLayout.LayoutParams txtPrecoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    txtPrecoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    txtPrecoParams.addRule(RelativeLayout.CENTER_VERTICAL);
+                    txtPreco.setLayoutParams(txtPrecoParams);
+                    txtPreco.setTextAppearance(this, android.R.style.TextAppearance_DeviceDefault_Medium);
+                    txtPreco.setText("R$ ".concat(String.valueOf(precision.format(p.getPreco()))));
+
+
+                    ImageView imageCart = new ImageView(this);
+                    RelativeLayout.LayoutParams cartParams = new RelativeLayout.LayoutParams((int) (50 * scale), RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    cartParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                    cartParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+                    cartParams.addRule(RelativeLayout.START_OF, p.getId());
+                    imageCart.setLayoutParams(cartParams);
+                    imageCart.setImageResource(R.drawable.cart);
+                    imageCart.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Uri uri = Uri.parse(p.getLink());
+                            Intent intent = new Intent("android.intent.action.VIEW", Uri.parse(String.valueOf(p.getLink())));
+                            startActivity(intent);
+                        }
+                    });
+                    //endregion
+
+                    relBuy.addView(txtPreco);
+                    relBuy.addView(imageCart);
+
+                    // Adds the view to the layout
+                    grd.addView(relImage);
+                    grd.addView(relBuy);
+                    innerLinear.addView(grd);
+
+                    if (isFirst) {
+                        lastHsvId = currentHsvId;
+                        isFirst = false;
+                    }
+                }
+
+                horizontal.addView(innerLinear);
+                relMaster.addView(horizontal);
+                relMaster.addView(hImage);
             }
-
-            horizontal.addView(innerLinear);
-            relMaster.addView(horizontal);
-            relMaster.addView(hImage);
-
         }
     }
 
@@ -310,7 +326,17 @@ public class IndicacaoActivity extends Activity {
         }
         return position;
     }
+
+    public void zoomOut(View view){
+        ImageView fullscreenView = (ImageView) findViewById(R.id.fullscreenView);
+        RelativeLayout relMaster = (RelativeLayout) findViewById(R.id.relMasterIndicacao);
+        fullscreenView.setVisibility(View.INVISIBLE);
+        relMaster.setVisibility(View.VISIBLE);
+        fullscreenView.destroyDrawingCache();
+    }
 }
+
+
 
 //TODO Cor do datapciker
 //TODO cor da segunda parte
